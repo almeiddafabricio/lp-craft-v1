@@ -1,0 +1,10 @@
+Coloque aqui o vídeo do Hero com o nome exato:
+
+  hero-video.mp4
+
+Recomendações:
+- Vertical 9:16 (ex.: 720x1280), sem áudio, 6 a 15 segundos em loop
+- Até ~3 MB (H.264, MP4) para manter a página rápida no 4G
+- Atualize também o poster (primeiro frame) em /public/images/hero-poster.webp
+
+Enquanto o vídeo não existir, o celular do Hero mostra apenas o poster.
