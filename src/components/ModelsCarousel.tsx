@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { CATEGORY_STYLE, MODELS_ROW_1, MODELS_ROW_2, type CarModel } from "../data/catalog";
 import { cn, paperRotation } from "../lib/utils";
@@ -10,28 +10,35 @@ const TAPE_COLORS = ["yellow", "blue", "red", "white"] as const;
 
 function ModelCard({ model, index }: { model: CarModel; index: number }) {
   return (
-    <figure className="paper w-[180px] p-2 pb-2.5 md:w-[220px]" style={{ rotate: `${paperRotation(index) * 1.4}deg` }}>
+    <figure className="paper w-[180px] px-2 pb-2.5 pt-4 md:w-[220px]" style={{ rotate: `${paperRotation(index) * 1.4}deg` }}>
+      {/* fita fica só na borda do card, sem cobrir o título impresso na folha */}
       <Tape
         color={TAPE_COLORS[index % TAPE_COLORS.length]}
-        className="-top-3 left-1/2 w-20 -translate-x-1/2"
+        className="-top-4 left-1/2 w-20 -translate-x-1/2"
         style={{ rotate: `${index % 2 ? 4 : -5}deg` }}
       />
-      <div className="aspect-[4/3] overflow-hidden rounded-[3px] bg-paper-shade">
-        {/* TROCAR: foto do carro montado (WebP ~480x360) em /public/images/ */}
+      {/* Folha A4 em pé (1054x1492): mesma proporção da imagem, então nada é cortado */}
+      <div className="aspect-[1054/1492] overflow-hidden rounded-[3px] bg-white ring-1 ring-kraft-deep/25">
         <img
           src={model.image}
-          alt={`Carro ${model.name} montado em papel`}
-          width={480}
-          height={360}
+          alt={`Folha do molde de papercraft do ${model.name}`}
+          width={440}
+          height={623}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
         />
       </div>
-      <figcaption className="mt-2.5 flex items-center justify-between gap-2 px-0.5">
-        <span className="truncate font-display text-[0.95rem] leading-tight">{model.name}</span>
-        <span className={cn("stamp shrink-0 px-2 py-0.5 text-[0.7rem]", CATEGORY_STYLE[model.category])}>
-          {model.category}
+      <figcaption className="mt-2.5 px-0.5">
+        <span className={cn("stamp px-2 py-0.5 text-[0.7rem]", CATEGORY_STYLE[model.category])}>{model.category}</span>
+        <span className="mt-1.5 block min-h-[2.5em] text-balance font-display text-[0.86rem] leading-[1.25] md:text-[0.95rem]">
+          {/* cada palavra sem quebra interna: evita "Mercedes- / Benz", "GT- / R" */}
+          {model.name.split(" ").map((word, i) => (
+            <Fragment key={i}>
+              {i > 0 && " "}
+              <span className="whitespace-nowrap">{word}</span>
+            </Fragment>
+          ))}
         </span>
       </figcaption>
     </figure>
@@ -43,7 +50,11 @@ function MarqueeRow({ items, direction, paused }: { items: CarModel[]; direction
   const loop = [...items, ...items];
   return (
     <div className="marquee" data-paused={paused}>
-      <ul className={cn("marquee-track", direction === "right" && "marquee-track--right")}>
+      {/* 5s por card: a velocidade continua a mesma, não importa quantos modelos a fileira tenha */}
+      <ul
+        className={cn("marquee-track", direction === "right" && "marquee-track--right")}
+        style={{ animationDuration: `${items.length * 5}s` }}
+      >
         {loop.map((model, i) => {
           const dup = i >= items.length;
           return (
@@ -87,7 +98,7 @@ export function ModelsCarousel() {
 
       <div className="mx-auto mt-8 max-w-6xl px-gutter text-center">
         <p className="mx-auto max-w-xl font-hand text-[1.9rem] font-bold leading-tight text-ink md:text-4xl">
-          E mais de 290 outros modelos esperando por você <span aria-hidden="true">👀</span>
+          E mais de 270 outros modelos esperando por você <span aria-hidden="true">👀</span>
           <HandArrow variant="curve" className="ml-1 hidden h-12 w-14 rotate-12 align-bottom md:inline-block" />
         </p>
         <div className="mt-8">

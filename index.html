@@ -40,8 +40,29 @@
     <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/caveat-700-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Poster do vídeo do Hero: candidato a LCP, carregado com prioridade -->
-    <link rel="preload" as="image" href="/images/hero-poster.webp" type="image/webp" fetchpriority="high" />
+    <!-- Foto do Hero (abaixo do título): maior imagem da 1ª tela no celular (LCP).
+         O navegador escolhe o tamanho certo pelo imagesrcset/imagesizes (iguais aos do <img>). -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      imagesrcset="/images/hero-foto-480.webp 480w, /images/hero-foto-640.webp 640w, /images/hero-foto-768.webp 768w, /images/hero-foto-1080.webp 1080w"
+      imagesizes="(min-width: 1024px) 432px, (min-width: 640px) 560px, calc(100vw - 66px)"
+      fetchpriority="high"
+    />
+
+    <!-- ===== VSL do Hero (VTurb) =====
+         Código de otimização da VTurb (pré-carrega o player e o vídeo), colado como veio.
+         O player em si é carregado no fim do <body>, depois que o <vturb-smartplayer> existe.
+         IDs também em src/config.ts (VTURB). -->
+    <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+    <link rel="preload" href="https://scripts.converteai.net/4811b074-5023-4324-896d-c66fb303e164/players/6af6980bb5baa44d4a4197fa/v4/player.js" as="script">
+    <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+    <link rel="preload" href="https://cdn.converteai.net/4811b074-5023-4324-896d-c66fb303e164/6af697fb46dfa8313caf40a8/main.m3u8" as="fetch">
+    <link rel="dns-prefetch" href="https://cdn.converteai.net">
+    <link rel="dns-prefetch" href="https://scripts.converteai.net">
+    <link rel="dns-prefetch" href="https://images.converteai.net">
+    <link rel="dns-prefetch" href="https://license.vturb.com">
 
     <!-- ===== Rastreamento (UTMify) =====
          1) Pixel da Meta Ads via UTMify  -> cdn.utmify.com.br/scripts/pixel/pixel.js (pixelId 6af6312aaaf1a6663db808c0)
@@ -54,6 +75,20 @@
   <body>
     <div id="root"></div>
     <noscript>Ative o JavaScript para ver esta página.</noscript>
+    <!-- Player da VSL (VTurb): roda aqui, logo depois do HTML da página, porque o player
+         procura o <vturb-smartplayer id="vid-..."> assim que carrega. Em modo dev (sem HTML
+         pré-renderizado) o elemento ainda não existe e o Hero carrega o player depois. -->
+    <script>
+      (function () {
+        if (!document.getElementById("vid-6af6980bb5baa44d4a4197fa")) return;
+        if (document.querySelector("script[data-vturb-player]")) return;
+        var s = document.createElement("script");
+        s.src = "https://scripts.converteai.net/4811b074-5023-4324-896d-c66fb303e164/players/6af6980bb5baa44d4a4197fa/v4/player.js";
+        s.async = true;
+        s.setAttribute("data-vturb-player", "");
+        document.head.appendChild(s);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

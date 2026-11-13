@@ -21,12 +21,12 @@ function LaptopMockup() {
         <div className="laptop-screen">
           <span className="absolute left-1/2 top-[1.3%] h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[#55585f]" aria-hidden="true" />
           <div className="aspect-[16/10] overflow-hidden rounded-[4px] bg-paper">
-            {/* TROCAR: print real da sua área de membros (WebP ~1280x800) */}
+            {/* Print da área de membros (PNG 960x600, 16:10 igual à tela do notebook) */}
             <img
-              src="/images/biblioteca-print.webp"
+              src="/images/biblioteca-print.png"
               alt="Tela da biblioteca online com os moldes separados por categoria"
-              width={1280}
-              height={800}
+              width={960}
+              height={600}
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover object-top"
@@ -82,7 +82,7 @@ export function Organized() {
 
       <div className="mt-14 grid items-center gap-10 md:mt-16 lg:grid-cols-[1.25fr_1fr]">
         <Reveal className="relative">
-          <Tape color="yellow" className="-top-3 left-[12%] z-10 rotate-[-6deg]" />
+          <Tape color="yellow" className="-top-5 left-[12%] z-10 rotate-[-6deg]" />
           <LaptopMockup />
         </Reveal>
 

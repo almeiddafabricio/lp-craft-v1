@@ -53,13 +53,13 @@ export function Bonus() {
                   </div>
                   {/* corpo da caixa */}
                   <div className="paper overflow-hidden rounded-t-none pb-5">
-                    {/* Prévia da folha de moldes do bônus (quadrada, WebP 800x800) */}
+                    {/* Prévia da folha de moldes do bônus (quadrada, WebP 680x680) */}
                     <div className="aspect-square border-b border-dashed border-kraft-deep/40 bg-white">
                       <img
                         src={bonus.image}
                         alt={`Prévia dos moldes do bônus: ${bonus.title}`}
-                        width={800}
-                        height={800}
+                        width={680}
+                        height={680}
                         loading="lazy"
                         decoding="async"
                         className="h-full w-full object-cover"

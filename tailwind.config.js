@@ -52,19 +52,26 @@ export default {
           "0%, 100%": { transform: "translateY(0) rotate(var(--r, 0deg))" },
           "50%": { transform: "translateY(-14px) rotate(calc(var(--r, 0deg) + 3deg))" },
         },
+        // Cresce pouco na horizontal (5%): em botões largos, 12% passava da margem de 25px
+        // e criava rolagem lateral no celular deitado / tablet pequeno
         "pulse-ring": {
           "0%": { transform: "scale(1)", opacity: "0.7" },
-          "80%, 100%": { transform: "scale(1.12, 1.4)", opacity: "0" },
+          "80%, 100%": { transform: "scale(1.05, 1.4)", opacity: "0" },
         },
         wiggle: {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
+        },
+        nudge: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(6px)" },
         },
       },
       animation: {
         float: "float 6s ease-in-out infinite",
         "pulse-ring": "pulse-ring 2.2s cubic-bezier(.2,.6,.3,1) infinite",
         wiggle: "wiggle 3s ease-in-out infinite",
+        nudge: "nudge 1.2s ease-in-out infinite",
       },
     },
   },

@@ -1,50 +1,55 @@
 import { useEffect, useRef } from "react";
-import { useReducedMotion } from "framer-motion";
+import { VTURB } from "../config";
 import { CTAButton } from "./ui/CTAButton";
 import { HandArrow, Scribble, Tape } from "./ui/Decor";
 import { TrustCarousel } from "./ui/TrustCarousel";
 
-/** Mockup de celular em CSS com o vídeo do produto dentro */
-function PhoneMockup() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const reduceMotion = useReducedMotion();
+/* Elemento do player da VTurb. Vai como HTML "cru" (dangerouslySetInnerHTML) para o React
+   não mexer no que o player injeta dentro dele: sem isso, a hidratação poderia apagar o vídeo. */
+const VTURB_ELEMENT_HTML = `<vturb-smartplayer id="vid-${VTURB.playerId}" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer>`;
 
-  // Garante autoplay mudo no iOS/Android (o atributo "muted" do React nem sempre é aplicado a tempo)
-  // e pausa o vídeo para quem ativou "reduzir movimento" no sistema.
+/** Mockup de celular em CSS com a VSL (VTurb) dentro: a tela tem 9:16, igual ao vídeo */
+function PhoneMockup() {
+  const slotRef = useRef<HTMLDivElement>(null);
+
+  // A miniatura que o player injeta vem sem "alt" (falha de acessibilidade/SEO no Lighthouse):
+  // marcamos as imagens do player como decorativas; o nome do vídeo fica no aria-label do bloco.
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = true;
-    if (reduceMotion) {
-      v.pause();
-      return;
-    }
-    v.play().catch(() => {
-      /* sem vídeo ou autoplay bloqueado: o poster continua visível */
-    });
-  }, [reduceMotion]);
+    const slot = slotRef.current;
+    if (!slot) return;
+    const fixAlt = () => slot.querySelectorAll("img:not([alt])").forEach((img) => img.setAttribute("alt", ""));
+    fixAlt();
+    const observer = new MutationObserver(fixAlt);
+    observer.observe(slot, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
+  // No build, o index.html já carrega o player logo depois do HTML pré-renderizado.
+  // Este efeito só age no modo dev (página montada pelo React, sem HTML pronto).
+  useEffect(() => {
+    if (document.querySelector("script[data-vturb-player]")) return;
+    const s = document.createElement("script");
+    s.src = VTURB.playerScript;
+    s.async = true;
+    s.setAttribute("data-vturb-player", "");
+    document.head.appendChild(s);
+  }, []);
 
   return (
     <div className="relative mx-auto w-fit">
       <div className="phone">
         <span className="phone-btn top-[22%] h-12" aria-hidden="true" />
         <span className="phone-btn top-[34%] h-8" aria-hidden="true" />
-        <div className="phone-notch" aria-hidden="true" />
-        <div className="phone-screen">
-          {/* TROCAR: /public/video/hero-video.mp4 (vertical 9:16, mudo, até ~3 MB) e o poster /public/images/hero-poster.webp */}
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/images/hero-poster.webp"
-            aria-label="Vídeo mostrando carros de papel sendo montados"
-          >
-            <source src="/video/hero-video.mp4" type="video/mp4" />
-          </video>
+        {/* câmera na borda de cima (fora da tela, para não cobrir o vídeo) */}
+        <span className="phone-camera" aria-hidden="true" />
+        <div className="phone-screen" style={{ backgroundImage: `url(${VTURB.poster})` }}>
+          <div
+            ref={slotRef}
+            className="vsl-slot"
+            role="group"
+            aria-label="Vídeo de apresentação dos moldes de carros 3D"
+            dangerouslySetInnerHTML={{ __html: VTURB_ELEMENT_HTML }}
+          />
         </div>
       </div>
 
@@ -78,7 +83,24 @@ export function Hero() {
             Tenha acesso a uma biblioteca com{" "}
             <mark className="marker">mais de 300 moldes de carros 3D</mark> para imprimir e montar
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-base text-asphalt/85 md:text-lg lg:mx-0">
+          {/* Foto do carro montado + moldes impressos (WebP 4:3 em 4 tamanhos).
+              No celular é a maior imagem da 1ª tela (LCP): carrega já, com preload no index.html */}
+          <figure className="relative mx-auto mt-7 max-w-xl -rotate-1 lg:mx-0 lg:max-w-md">
+            <Tape color="yellow" className="-top-3 left-1/2 -translate-x-1/2 rotate-[3deg]" />
+            <div className="paper p-2">
+              <img
+                src="/images/hero-foto-768.webp"
+                srcSet="/images/hero-foto-480.webp 480w, /images/hero-foto-640.webp 640w, /images/hero-foto-768.webp 768w, /images/hero-foto-1080.webp 1080w"
+                sizes="(min-width: 1024px) 432px, (min-width: 640px) 560px, calc(100vw - 66px)"
+                width={1080}
+                height={810}
+                decoding="async"
+                alt="Nissan Skyline montado em papel nas mãos, com os moldes impressos do Gol G5, Opala e Gol Quadrado ao fundo"
+                className="block aspect-[4/3] w-full rounded-[2px] object-cover"
+              />
+            </div>
+          </figure>
+          <p className="mx-auto mt-6 max-w-xl text-base text-asphalt/85 md:text-lg lg:mx-0">
             Moldes de carros clássicos, JDM japoneses, esportivos, picapes e muito mais, tudo organizado em uma
             biblioteca online para você escolher, baixar e imprimir quando quiser.
           </p>
