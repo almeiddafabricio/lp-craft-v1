@@ -42,7 +42,7 @@ export const VTURB = {
   poster: "https://cdn.converteai.net/4811b074-5023-4324-896d-c66fb303e164/6af697fb46dfa8313caf40a8/poster.jpg",
 } as const;
 
-/** Preços (em reais). Usados nos cards de plano e no CTA fixo do mobile. */
+/** Preços (em reais). Usados nos cards de plano e no pop-up de upsell. */
 export const PRICES = {
   basico: { de: 47.9, por: 9.9 },
   premium: { de: 67.9, por: 24.9 },
