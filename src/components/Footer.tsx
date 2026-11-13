@@ -5,7 +5,7 @@ import { Logo } from "./ui/Logo";
 /** 12. RODAPÉ */
 export function Footer() {
   return (
-    <footer className="bg-asphalt-tex relative pb-28 pt-14 text-paper md:pb-12">
+    <footer className="bg-asphalt-tex relative pb-12 pt-14 text-paper">
       <CutLine />
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-gutter text-center md:flex-row md:items-start md:justify-between md:text-left">
         <div>

@@ -12,7 +12,6 @@ import { Pricing } from "./components/Pricing";
 import { Guarantee } from "./components/Guarantee";
 import { FAQ } from "./components/FAQ";
 import { Footer } from "./components/Footer";
-import { StickyMobileCTA } from "./components/StickyMobileCTA";
 
 export default function App() {
   return (
@@ -35,7 +34,6 @@ export default function App() {
           <FAQ />
         </main>
         <Footer />
-        <StickyMobileCTA />
       </MotionConfig>
     </LazyMotion>
   );
