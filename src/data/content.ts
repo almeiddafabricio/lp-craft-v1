@@ -10,7 +10,7 @@ export type BonusItem = {
   description: string;
   /** Preço "de" (âncora) em reais */
   price: number;
-  /** Imagem do bônus: prévia da folha de moldes (WebP quadrado, 800x800) */
+  /** Imagem do bônus: prévia da folha de moldes (WebP quadrado, 680x680) */
   image: string;
 };
 
@@ -45,13 +45,14 @@ export const BONUS_TOTAL = BONUSES.reduce((sum, b) => sum + b.price, 0);
 
 /* -------------------------------------------------------------------------
    DEPOIMENTOS
-   TROCAR: substitua pelos depoimentos REAIS dos seus clientes.
-   Fotos: /public/images/depoimento-foto-1.webp ... (quadradas, ~500x500)
+   Fotos: /public/images/depoimento-foto-1.webp ... (WebP 4:3, 720x540)
+   `city` é opcional: preencha com a cidade real do cliente (ex.: "Curitiba/PR");
+   se ficar vazio, a linha não aparece no card.
    ------------------------------------------------------------------------- */
 export type Testimonial = {
   photo: string;
   name: string;
-  city: string;
+  city?: string;
   text: string;
   stars: number;
 };
@@ -59,33 +60,46 @@ export type Testimonial = {
 export const TESTIMONIALS: Testimonial[] = [
   {
     photo: "/images/depoimento-foto-1.webp",
-    name: "[Nome do cliente]",
-    city: "[Cidade/UF]",
-    text: "[DEPOIMENTO REAL AQUI] Conte qual modelo a pessoa montou, quanto tempo levou e como foi a experiência.",
+    name: "Roberto da Silva",
+    text: "Pessoal ai da pagina moldes carros3d estão de parabéns pela qualidade dos moldes, ja imprimir e montei alguns ficou top demais!",
     stars: 5,
   },
   {
     photo: "/images/depoimento-foto-2.webp",
-    name: "[Nome do cliente]",
-    city: "[Cidade/UF]",
-    text: "[DEPOIMENTO REAL AQUI] Ideal: um pai que montou com o filho e tirou a criança do celular.",
+    name: "Marcos Almeida",
+    text: "Gostei dos moldes qualidade top, ja montei alguns, parabéns pelo o trabalho!",
     stars: 5,
   },
   {
     photo: "/images/depoimento-foto-3.webp",
-    name: "[Nome do cliente]",
-    city: "[Cidade/UF]",
-    text: "[DEPOIMENTO REAL AQUI] Ideal: alguém que já montou vários e começou uma coleção na estante.",
+    name: "Levi Bonin",
+    text: "Não vou mentir comprei com receio de ser golpe, mais recebi o acesso tudo certo também já imprimir e montei alguns top demais!",
     stars: 5,
   },
 ];
 
-/** TROCAR: prints reais de WhatsApp/Instagram (WebP, retrato ~600x800) */
-export const FEEDBACK_PRINTS: string[] = [
-  "/images/feedback-1.webp",
-  "/images/feedback-2.webp",
-  "/images/feedback-3.webp",
-  "/images/feedback-4.webp",
+/** Prints reais de WhatsApp (WebP 600px de largura, retrato).
+ *  Telefones, e-mails e fotos pessoais já estão desfocados nas imagens.
+ *  `alt` traz a resposta do cliente para leitores de tela. */
+export type FeedbackPrint = { src: string; alt: string };
+
+export const FEEDBACK_PRINTS: FeedbackPrint[] = [
+  {
+    src: "/images/feedback-1.webp",
+    alt: "Print de WhatsApp: cliente responde “opa blz ja vi a mensagem do e-mail também, tudo certo por enquanto.”",
+  },
+  {
+    src: "/images/feedback-2.webp",
+    alt: "Print de WhatsApp: cliente responde “opa noite blz obrigado.”",
+  },
+  {
+    src: "/images/feedback-3.webp",
+    alt: "Print de WhatsApp: cliente responde “opa tudo joia? blz depois vou dar uma conferida” e envia uma figurinha",
+  },
+  {
+    src: "/images/feedback-4.webp",
+    alt: "Print de WhatsApp: cliente responde “obrigado já recebi pelo o e-mail também” e “deu uma olhada a qualidade e top amanhã vou imprimir pro meu neto.”",
+  },
 ];
 
 /* -------------------------------------------------------------------------

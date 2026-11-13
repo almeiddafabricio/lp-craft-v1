@@ -29,6 +29,19 @@ export const PRODUCT_NAME = "+300 Moldes Carros 3D";
 export const TERMS_URL = "#";
 export const PRIVACY_URL = "#";
 
+/**
+ * VSL do Hero, hospedada na VTurb (vídeo vertical 9:16).
+ * ATENÇÃO: os mesmos IDs aparecem no index.html (código de otimização no <head>
+ * e carregador do player no fim do <body>). Ao trocar o vídeo, troque nos dois lugares.
+ */
+export const VTURB = {
+  playerId: "6af6980bb5baa44d4a4197fa",
+  playerScript:
+    "https://scripts.converteai.net/4811b074-5023-4324-896d-c66fb303e164/players/6af6980bb5baa44d4a4197fa/v4/player.js",
+  /** Capa do vídeo: aparece na tela do celular enquanto o player carrega */
+  poster: "https://cdn.converteai.net/4811b074-5023-4324-896d-c66fb303e164/6af697fb46dfa8313caf40a8/poster.jpg",
+} as const;
+
 /** Preços (em reais). Usados nos cards de plano e no CTA fixo do mobile. */
 export const PRICES = {
   basico: { de: 47.9, por: 9.9 },

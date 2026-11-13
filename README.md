@@ -18,32 +18,36 @@ npm run preview   # serve o /dist localmente para testar
 ### 1. `src/config.ts`
 | Constante | O que é |
 |---|---|
-| `CHECKOUT_BASICO` / `CHECKOUT_PREMIUM` | links de checkout (hoje `"#"`) |
+| `CHECKOUT_BASICO` / `CHECKOUT_PREMIUM` | links de checkout (já configurados) |
 | `CHECKOUT_PREMIUM_OFERTA` | checkout do Premium com preço especial, oferecido no pop-up que abre ao clicar em "QUERO O BÁSICO" (quem recusa vai para `CHECKOUT_BASICO`) |
 | `TERMS_URL`, `PRIVACY_URL` | links legais do rodapé |
 | `PRICES` | preços "de/por" dos planos e `ofertaPremium` (preço do pop-up de upsell). O % OFF é calculado sozinho |
+| `VTURB` | IDs do player da VSL (VTurb) no celular do Hero e capa mostrada enquanto ele carrega |
 
 ### 2. Conteúdo: `src/data/`
 - `catalog.ts`: modelos dos carrosséis e quantidades por categoria (ajuste para os números reais)
-- `content.ts`: bônus, **depoimentos (`[DEPOIMENTO REAL AQUI]`)**, prints e FAQ
+- `content.ts`: bônus, depoimentos (campo `city` opcional), prints e FAQ
 
 ### 3. Imagens: `/public/images/` (substitua mantendo o mesmo nome)
-Todas as imagens atuais são placeholders marcados com "PLACEHOLDER".
+Todas as imagens desta tabela já são as reais (só a `og-image.jpg` ainda é placeholder).
 
 | Arquivo | Tamanho sugerido |
 |---|---|
-| `hero-poster.webp` | 540x1170 (primeiro frame do vídeo) |
-| `molde-*.webp` (16 arquivos) | 480x360, foto do carro montado |
-| `biblioteca-print.webp` | 1280x800, print da área de membros |
-| `bonus-cinema.webp`, `bonus-motos.webp`, `bonus-f1.webp` | 800x800 quadrada (já são as imagens reais dos bônus) |
-| `depoimento-foto-1..3.webp` | 500x500 |
-| `feedback-1..4.webp` | 600x800, prints de WhatsApp/Instagram |
+| `hero-foto-480/640/768/1080.webp` | foto real do Hero (4:3, abaixo do título); o navegador escolhe o tamanho pela tela |
+| `molde-*.webp` (30 arquivos) | 440x623, folha A4 em pé (já são as folhas reais, 5 por categoria) |
+| `biblioteca-print.png` | 960x600 (16:10), print real da área de membros |
+| `bonus-cinema.webp`, `bonus-motos.webp`, `bonus-f1.webp` | 680x680 quadrada (já são as imagens reais dos bônus) |
+| `depoimento-foto-1..3.webp` | 720x540 (4:3), já são as fotos reais dos depoimentos |
+| `feedback-1..4.webp` | 600px de largura (retrato), prints reais de WhatsApp com telefone, e-mail e fotos pessoais desfocados |
 | `/public/og-image.jpg` | 1200x630, imagem de compartilhamento |
 
 Use WebP (ex.: [squoosh.app](https://squoosh.app)) para manter a página leve.
 
-### 4. Vídeo: `/public/video/hero-video.mp4`
-Vertical 9:16, sem áudio, 6 a 15 s, até ~3 MB. Enquanto não existir, o celular do Hero mostra o poster.
+### 4. Vídeo (VSL na VTurb)
+O vídeo do celular do Hero é o player da VTurb (vertical 9:16; a tela do celular tem a mesma proporção).
+Para trocar de vídeo, atualize os IDs em **3 lugares**: `VTURB` em `src/config.ts`, o bloco
+"VSL do Hero (VTurb)" no `<head>` do `index.html` e o carregador do player no fim do `<body>`.
+Se o novo vídeo não for 9:16, ajuste `aspect-ratio` de `.phone-screen` em `src/index.css`.
 
 ### 5. `index.html`
 Troque `https://SEU-DOMINIO.com.br` nas tags Open Graph pelo domínio final.
@@ -70,5 +74,5 @@ public/fonts/            Archivo Black, Caveat e Inter (Google Fonts, licença O
 - Fontes hospedadas localmente com `preload` e `font-display: swap` (sem "pulo" de layout)
 - Imagens WebP com `loading="lazy"` (exceto o Hero), dimensões fixas
 - Framer Motion com `LazyMotion` (bundle menor)
-- `prefers-reduced-motion`: animações desligadas, carrossel vira rolagem manual, vídeo pausado
-- Lighthouse mobile medido localmente: Performance 92 · Acessibilidade 100 · Boas práticas 100 · SEO 100
+- `prefers-reduced-motion`: animações desligadas, carrossel vira rolagem manual
+- Lighthouse mobile medido localmente (com a VSL da VTurb): Performance 90 · Acessibilidade 100 · Boas práticas 96 · SEO 100 (os 4 pontos de boas práticas são erros de console da licença/analítica da VTurb, bloqueadas no teste local)
