@@ -4,6 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
+    <!-- ===== Proteção contra cópia (dissuasão) =====
+         Bloqueia copiar/recortar/colar, botão direito, arrastar imagens e os atalhos que abrem
+         DevTools, código-fonte e "salvar página". Não é proteção real (o código de um site sempre
+         chega ao navegador); só atrapalha a cópia casual. Fica aqui no topo para valer desde o
+         primeiro instante, antes do resto da página carregar. -->
+    <script>
+      (function () {
+        // Campos de digitação continuam aceitando colar (útil se um formulário entrar na página)
+        function isEditable(el) {
+          return !!(el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)));
+        }
+        function block(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        ["copy", "cut"].forEach(function (type) {
+          document.addEventListener(type, block, true);
+        });
+        document.addEventListener("paste", function (e) { if (!isEditable(e.target)) block(e); }, true);
+        document.addEventListener("contextmenu", block, true);
+        document.addEventListener("dragstart", function (e) { if (e.target && e.target.tagName === "IMG") block(e); }, true);
+        document.addEventListener("keydown", function (e) {
+          var code = e.code || "";
+          var key = (e.key || "").toLowerCase();
+          var mod = e.ctrlKey || e.metaKey;
+          // e.code é a tecla física: no Mac, Option muda o e.key (ex.: Option+I vira "ˆ")
+          var letter = code.indexOf("Key") === 0 ? code.slice(3).toLowerCase() : key;
+          if (key === "f12" || code === "F12") return block(e); // DevTools
+          if (mod && (e.shiftKey || e.altKey) && /^[ijck]$/.test(letter)) return block(e); // DevTools / console / inspecionar
+          if (mod && letter === "u") return block(e); // ver código-fonte
+          if (mod && letter === "s") return block(e); // salvar página
+          if (mod && /^[cx]$/.test(letter)) return block(e); // copiar / recortar
+          if (mod && letter === "v" && !isEditable(e.target)) return block(e); // colar
+        }, true);
+      })();
+    </script>
+
     <!-- ===== SEO básico ===== -->
     <title>+300 Moldes Carros 3D | Moldes de carros em papel para imprimir e montar</title>
     <meta

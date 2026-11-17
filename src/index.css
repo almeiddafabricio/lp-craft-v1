@@ -74,6 +74,13 @@
     }
   }
 
+  /* Proteção contra cópia (junto do script no index.html): sem arrastar imagem
+     e sem o menu "Salvar imagem" do toque longo no iPhone */
+  img {
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+  }
+
   h1, h2, h3 {
     @apply font-display font-bold;
     text-wrap: balance;
