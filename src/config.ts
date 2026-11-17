@@ -8,10 +8,10 @@
  * Usado no link "Não, obrigado. Quero só o Básico" do pop-up de upsell
  * (o botão "QUERO O BÁSICO" abre o pop-up antes).
  */
-export const CHECKOUT_BASICO = "https://ggcheckout.app/checkout/v2/EjG9EGy8RM9GPT0eIyoNTO";
+export const CHECKOUT_BASICO = "https://ggcheckout.app/checkout/v5/cnwvDubAwmon77SvEWNt9W";
 
 /** Checkout do Plano Premium (R$ 24,90): botão "QUERO O PREMIUM" do card */
-export const CHECKOUT_PREMIUM = "https://ggcheckout.app/checkout/v2/2MAOW9lLcCng1HfKUuoHaU";
+export const CHECKOUT_PREMIUM = "https://ggcheckout.app/checkout/v5/qf94tOYeYDGW5yPTikUYpD";
 
 /**
  * Checkout do Premium com preço especial (R$ 14,90 = PRICES.ofertaPremium).
