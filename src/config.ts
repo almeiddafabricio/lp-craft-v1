@@ -4,11 +4,17 @@
    ========================================================================= */
 
 /**
- * Checkout do Plano Básico (R$ 9,90).
- * Usado no link "Não, obrigado. Quero só o Básico" do pop-up de upsell
- * (o botão "QUERO O BÁSICO" abre o pop-up antes).
+ * Checkout do Plano Básico (R$ 9,90) no botão "QUERO O BÁSICO" do card.
+ * O clique abre o pop-up de upsell em vez de navegar; este link só é usado
+ * se o visitante abrir o botão em nova aba (Ctrl/Cmd + clique) ou sem JavaScript.
  */
 export const CHECKOUT_BASICO = "https://ggcheckout.app/checkout/v5/cnwvDubAwmon77SvEWNt9W";
+
+/**
+ * Checkout do Plano Básico (R$ 9,90) para quem RECUSA a oferta de R$ 14,90:
+ * link "Não, obrigado. Quero só o Básico por R$ 9,90" do pop-up de upsell.
+ */
+export const CHECKOUT_BASICO_RECUSA = "https://ggcheckout.app/checkout/v5/EjG9EGy8RM9GPT0eIyoNTO";
 
 /** Checkout do Plano Premium (R$ 24,90): botão "QUERO O PREMIUM" do card */
 export const CHECKOUT_PREMIUM = "https://ggcheckout.app/checkout/v5/qf94tOYeYDGW5yPTikUYpD";

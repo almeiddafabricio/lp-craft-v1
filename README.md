@@ -19,7 +19,8 @@ npm run preview   # serve o /dist localmente para testar
 | Constante | O que é |
 |---|---|
 | `CHECKOUT_BASICO` / `CHECKOUT_PREMIUM` | links de checkout (já configurados) |
-| `CHECKOUT_PREMIUM_OFERTA` | checkout do Premium com preço especial, oferecido no pop-up que abre ao clicar em "QUERO O BÁSICO" (quem recusa vai para `CHECKOUT_BASICO`) |
+| `CHECKOUT_PREMIUM_OFERTA` | checkout do Premium com preço especial, oferecido no pop-up que abre ao clicar em "QUERO O BÁSICO" |
+| `CHECKOUT_BASICO_RECUSA` | checkout do Básico (R$ 9,90) para quem recusa a oferta no pop-up ("Não, obrigado. Quero só o Básico") |
 | `TERMS_URL`, `PRIVACY_URL` | links legais do rodapé |
 | `PRICES` | preços "de/por" dos planos e `ofertaPremium` (preço do pop-up de upsell). O % OFF é calculado sozinho |
 | `VTURB` | IDs do player da VSL (VTurb) no celular do Hero e capa mostrada enquanto ele carrega |
