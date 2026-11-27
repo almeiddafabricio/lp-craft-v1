@@ -35,11 +35,11 @@ export const PRIVACY_URL = "#";
  * e carregador do player no fim do <body>). Ao trocar o vídeo, troque nos dois lugares.
  */
 export const VTURB = {
-  playerId: "6af6980bb5baa44d4a4197fa",
+  playerId: "6b0919da3e4b2acbe02ef297",
   playerScript:
-    "https://scripts.converteai.net/4811b074-5023-4324-896d-c66fb303e164/players/6af6980bb5baa44d4a4197fa/v4/player.js",
+    "https://scripts.converteai.net/013cfdba-18ef-4f69-837c-ee091b5a6ffe/players/6b0919da3e4b2acbe02ef297/v4/player.js",
   /** Capa do vídeo: aparece na tela do celular enquanto o player carrega */
-  poster: "https://cdn.converteai.net/4811b074-5023-4324-896d-c66fb303e164/6af697fb46dfa8313caf40a8/poster.jpg",
+  poster: "https://cdn.converteai.net/013cfdba-18ef-4f69-837c-ee091b5a6ffe/6b0919d5735c38b74fcb7629/poster.jpg",
 } as const;
 
 /** Preços (em reais). Usados nos cards de plano e no pop-up de upsell. */
