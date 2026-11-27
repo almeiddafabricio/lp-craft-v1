@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- ===== Proteção contra cópia (dissuasão) =====
-         Bloqueia copiar/recortar/colar, botão direito, arrastar imagens e os atalhos que abrem
-         DevTools, código-fonte e "salvar página". Não é proteção real (o código de um site sempre
+         Bloqueia copiar/recortar/colar, selecionar texto, botão direito, arrastar imagens e os
+         atalhos que abrem DevTools, código-fonte, "salvar página" e imprimir. Não é proteção real (o código de um site sempre
          chega ao navegador); só atrapalha a cópia casual. Fica aqui no topo para valer desde o
          primeiro instante, antes do resto da página carregar. -->
     <script>
@@ -25,6 +25,7 @@
         });
         document.addEventListener("paste", function (e) { if (!isEditable(e.target)) block(e); }, true);
         document.addEventListener("contextmenu", block, true);
+        document.addEventListener("selectstart", function (e) { if (!isEditable(e.target)) block(e); }, true);
         document.addEventListener("dragstart", function (e) { if (e.target && e.target.tagName === "IMG") block(e); }, true);
         document.addEventListener("keydown", function (e) {
           var code = e.code || "";
@@ -36,6 +37,7 @@
           if (mod && (e.shiftKey || e.altKey) && /^[ijck]$/.test(letter)) return block(e); // DevTools / console / inspecionar
           if (mod && letter === "u") return block(e); // ver código-fonte
           if (mod && letter === "s") return block(e); // salvar página
+          if (mod && letter === "p") return block(e); // imprimir / salvar como PDF
           if (mod && /^[cx]$/.test(letter)) return block(e); // copiar / recortar
           if (mod && letter === "v" && !isEditable(e.target)) return block(e); // colar
         }, true);
@@ -43,6 +45,8 @@
     </script>
 
     <!-- ===== SEO básico ===== -->
+    <!-- noai/noimageai: pede às IAs que não usem o texto e as imagens (complementa o robots.txt) -->
+    <meta name="robots" content="noai, noimageai" />
     <title>+300 Moldes Carros 3D | Moldes de carros em papel para imprimir e montar</title>
     <meta
       name="description"
@@ -77,17 +81,6 @@
     <link rel="preload" href="/fonts/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/caveat-700-latin.woff2" as="font" type="font/woff2" crossorigin />
-
-    <!-- Foto do Hero (abaixo do título): maior imagem da 1ª tela no celular (LCP).
-         O navegador escolhe o tamanho certo pelo imagesrcset/imagesizes (iguais aos do <img>). -->
-    <link
-      rel="preload"
-      as="image"
-      type="image/webp"
-      imagesrcset="/images/hero-foto-480.webp 480w, /images/hero-foto-640.webp 640w, /images/hero-foto-768.webp 768w, /images/hero-foto-1080.webp 1080w"
-      imagesizes="(min-width: 1024px) 432px, (min-width: 640px) 560px, calc(100vw - 66px)"
-      fetchpriority="high"
-    />
 
     <!-- ===== VSL do Hero (VTurb) =====
          Código de otimização da VTurb (pré-carrega o player e o vídeo), colado como veio.

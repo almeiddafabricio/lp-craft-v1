@@ -81,6 +81,34 @@
     -webkit-touch-callout: none;
   }
 
+  /* Sem seleção de texto na página (campos de formulário continuam selecionáveis) */
+  html {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Imprimir / "Salvar como PDF": sai só um aviso, sem o conteúdo da página */
+  @media print {
+    body {
+      display: none !important;
+    }
+    html::after {
+      content: "A impressão desta página está desativada.";
+      display: block;
+      padding: 2rem;
+      font: 600 16px/1.4 system-ui, sans-serif;
+      color: #000;
+    }
+  }
+
   h1, h2, h3 {
     @apply font-display font-bold;
     text-wrap: balance;
