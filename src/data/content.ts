@@ -1,5 +1,5 @@
 /* =========================================================================
-   Conteúdo editável: bônus, depoimentos e FAQ
+   Conteúdo editável: bônus, prints do WhatsApp e FAQ
    ========================================================================= */
 
 export type BonusItem = {
@@ -43,62 +43,30 @@ export const BONUSES: BonusItem[] = [
 
 export const BONUS_TOTAL = BONUSES.reduce((sum, b) => sum + b.price, 0);
 
-/* -------------------------------------------------------------------------
-   DEPOIMENTOS
-   Fotos: /public/images/depoimento-foto-1.webp ... (WebP 4:3, 720x540)
-   `city` é opcional: preencha com a cidade real do cliente (ex.: "Curitiba/PR");
-   se ficar vazio, a linha não aparece no card.
-   ------------------------------------------------------------------------- */
-export type Testimonial = {
-  photo: string;
-  name: string;
-  city?: string;
-  text: string;
-  stars: number;
-};
-
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    photo: "/images/depoimento-foto-1.webp",
-    name: "Roberto da Silva",
-    text: "Pessoal ai da pagina moldes carros3d estão de parabéns pela qualidade dos moldes, ja imprimir e montei alguns ficou top demais!",
-    stars: 5,
-  },
-  {
-    photo: "/images/depoimento-foto-2.webp",
-    name: "Marcos Almeida",
-    text: "Gostei dos moldes qualidade top, ja montei alguns, parabéns pelo o trabalho!",
-    stars: 5,
-  },
-  {
-    photo: "/images/depoimento-foto-3.webp",
-    name: "Levi Bonin",
-    text: "Não vou mentir comprei com receio de ser golpe, mais recebi o acesso tudo certo também já imprimir e montei alguns top demais!",
-    stars: 5,
-  },
-];
-
-/** Prints reais de WhatsApp (WebP 600px de largura, retrato).
- *  Telefones, e-mails e fotos pessoais já estão desfocados nas imagens.
- *  `alt` traz a resposta do cliente para leitores de tela. */
+/** Prints reais de WhatsApp (WebP 600px de largura, retrato), como enviados pelos clientes
+ *  (uso autorizado por eles). `alt` traz a conversa para leitores de tela. */
 export type FeedbackPrint = { src: string; alt: string };
 
 export const FEEDBACK_PRINTS: FeedbackPrint[] = [
   {
     src: "/images/feedback-1.webp",
-    alt: "Print de WhatsApp: cliente responde “opa blz ja vi a mensagem do e-mail também, tudo certo por enquanto.”",
+    alt: "Print de WhatsApp: cliente diz “muito top o de verdade tava com receio de não conseguir montar mais tranquilo” e envia a foto de um carro vermelho de papel: “fiz esse junto com meu moleque ele gostou demais”",
   },
   {
     src: "/images/feedback-2.webp",
-    alt: "Print de WhatsApp: cliente responde “opa noite blz obrigado.”",
+    alt: "Print de WhatsApp: cliente diz “showw muito obrigado, gostei demais dos moldes” e envia a foto de uma Ferrari F40 de papel na mão: “montei essa ferrari f40 em 2 duas noites”",
   },
   {
     src: "/images/feedback-3.webp",
-    alt: "Print de WhatsApp: cliente responde “opa tudo joia? blz depois vou dar uma conferida” e envia uma figurinha",
+    alt: "Print de WhatsApp: cliente diz “essa bmw m3 e meu carro do sonhos” e envia a foto de uma BMW verde montada em papel: “fiz dessa verde mais tinha outra roxa”",
   },
   {
     src: "/images/feedback-4.webp",
-    alt: "Print de WhatsApp: cliente responde “obrigado já recebi pelo o e-mail também” e “deu uma olhada a qualidade e top amanhã vou imprimir pro meu neto.”",
+    alt: "Print de WhatsApp: cliente responde “opa blz ja vi a mensagem do e-mail também, tudo certo por enquanto.”",
+  },
+  {
+    src: "/images/feedback-5.webp",
+    alt: "Print de WhatsApp: cliente responde “opa noite blz obrigado.”",
   },
 ];
 

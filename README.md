@@ -25,20 +25,18 @@ npm run preview   # serve o /dist localmente para testar
 | `VTURB` | IDs do player da VSL (VTurb) no celular do Hero e capa mostrada enquanto ele carrega |
 
 ### 2. Conteúdo: `src/data/`
-- `catalog.ts`: modelos dos carrosséis e quantidades por categoria (ajuste para os números reais)
-- `content.ts`: bônus, depoimentos (campo `city` opcional), prints e FAQ
+- `catalog.ts`: moldes do carrossel (nome + imagem) e quantidades por categoria da seção "Tudo organizado" (ajuste para os números reais)
+- `content.ts`: bônus, prints do WhatsApp e FAQ
 
 ### 3. Imagens: `/public/images/` (substitua mantendo o mesmo nome)
 Todas as imagens desta tabela já são as reais (só a `og-image.jpg` ainda é placeholder).
 
 | Arquivo | Tamanho sugerido |
 |---|---|
-| `hero-foto-480/640/768/1080.webp` | foto real do Hero (4:3, abaixo do título); o navegador escolhe o tamanho pela tela |
-| `molde-*.webp` (30 arquivos) | 440x623, folha A4 em pé (já são as folhas reais, 5 por categoria) |
+| `molde-*.webp` (11 arquivos) | folha A4 em pé, até 440px de largura (já são as folhas reais do carrossel) |
 | `biblioteca-print.png` | 960x600 (16:10), print real da área de membros |
 | `bonus-cinema.webp`, `bonus-motos.webp`, `bonus-f1.webp` | 680x680 quadrada (já são as imagens reais dos bônus) |
-| `depoimento-foto-1..3.webp` | 720x540 (4:3), já são as fotos reais dos depoimentos |
-| `feedback-1..4.webp` | 600px de largura (retrato), prints reais de WhatsApp com telefone, e-mail e fotos pessoais desfocados |
+| `feedback-1..5.webp` | 600px de largura (retrato), prints reais de WhatsApp (uso autorizado pelos clientes) |
 | `/public/og-image.jpg` | 1200x630, imagem de compartilhamento |
 
 Use WebP (ex.: [squoosh.app](https://squoosh.app)) para manter a página leve.

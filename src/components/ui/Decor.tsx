@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import { Star } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 // Nomes de classe literais (o Tailwind não enxerga classes montadas com template string)
@@ -65,13 +64,3 @@ export function Scribble({ className }: { className?: string }) {
   );
 }
 
-/** 5 estrelas */
-export function Stars({ count = 5, className }: { count?: number; className?: string }) {
-  return (
-    <span className={cn("inline-flex gap-0.5", className)} role="img" aria-label={`${count} de 5 estrelas`}>
-      {Array.from({ length: count }, (_, i) => (
-        <Star key={i} className="h-[1.1em] w-[1.1em] fill-marker text-[#C08A16]" strokeWidth={1.5} aria-hidden="true" />
-      ))}
-    </span>
-  );
-}

@@ -8,7 +8,7 @@ type Props = {
   listClassName: string;
   /** Nome acessível da lista (ex.: "Depoimentos de clientes") */
   label: string;
-  /** Rótulos das setas (ex.: "Ver depoimento anterior") */
+  /** Rótulos das setas (ex.: "Ver print anterior") */
   prevLabel: string;
   nextLabel: string;
   hint?: string;

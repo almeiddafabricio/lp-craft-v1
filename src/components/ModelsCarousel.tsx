@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { Pause, Play } from "lucide-react";
-import { CATEGORY_STYLE, MODELS_ROW_1, MODELS_ROW_2, type CarModel } from "../data/catalog";
+import { MODELS_ROW_1, MODELS_ROW_2, type CarModel } from "../data/catalog";
 import { cn, paperRotation } from "../lib/utils";
 import { CTAButton } from "./ui/CTAButton";
 import { HandArrow, Tape } from "./ui/Decor";
@@ -30,8 +30,7 @@ function ModelCard({ model, index }: { model: CarModel; index: number }) {
         />
       </div>
       <figcaption className="mt-2.5 px-0.5">
-        <span className={cn("stamp px-2 py-0.5 text-[0.7rem]", CATEGORY_STYLE[model.category])}>{model.category}</span>
-        <span className="mt-1.5 block min-h-[2.5em] text-balance font-display text-[0.86rem] leading-[1.25] md:text-[0.95rem]">
+        <span className="block min-h-[2.5em] text-balance font-display text-[0.86rem] leading-[1.25] md:text-[0.95rem]">
           {/* cada palavra sem quebra interna: evita "Mercedes- / Benz", "GT- / R" */}
           {model.name.split(" ").map((word, i) => (
             <Fragment key={i}>
@@ -98,7 +97,7 @@ export function ModelsCarousel() {
 
       <div className="mx-auto mt-8 max-w-6xl px-gutter text-center">
         <p className="mx-auto max-w-xl font-hand text-[1.9rem] font-bold leading-tight text-ink md:text-4xl">
-          E mais de 270 outros modelos esperando por você <span aria-hidden="true">👀</span>
+          E mais de 280 outros modelos esperando por você <span aria-hidden="true">👀</span>
           <HandArrow variant="curve" className="ml-1 hidden h-12 w-14 rotate-12 align-bottom md:inline-block" />
         </p>
         <div className="mt-8">

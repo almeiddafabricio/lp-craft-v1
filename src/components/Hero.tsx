@@ -83,24 +83,7 @@ export function Hero() {
             Tenha acesso a uma biblioteca com{" "}
             <mark className="marker">mais de 300 moldes de carros 3D</mark> para imprimir e montar
           </h1>
-          {/* Foto do carro montado + moldes impressos (WebP 4:3 em 4 tamanhos).
-              No celular é a maior imagem da 1ª tela (LCP): carrega já, com preload no index.html */}
-          <figure className="relative mx-auto mt-7 max-w-xl -rotate-1 lg:mx-0 lg:max-w-md">
-            <Tape color="yellow" className="-top-3 left-1/2 -translate-x-1/2 rotate-[3deg]" />
-            <div className="paper p-2">
-              <img
-                src="/images/hero-foto-768.webp"
-                srcSet="/images/hero-foto-480.webp 480w, /images/hero-foto-640.webp 640w, /images/hero-foto-768.webp 768w, /images/hero-foto-1080.webp 1080w"
-                sizes="(min-width: 1024px) 432px, (min-width: 640px) 560px, calc(100vw - 66px)"
-                width={1080}
-                height={810}
-                decoding="async"
-                alt="Nissan Skyline montado em papel nas mãos, com os moldes impressos do Gol G5, Opala e Gol Quadrado ao fundo"
-                className="block aspect-[4/3] w-full rounded-[2px] object-cover"
-              />
-            </div>
-          </figure>
-          <p className="mx-auto mt-6 max-w-xl text-base text-asphalt/85 md:text-lg lg:mx-0">
+          <p className="mx-auto mt-5 max-w-xl text-base text-asphalt/85 md:text-lg lg:mx-0">
             Moldes de carros clássicos, JDM japoneses, esportivos, picapes e muito mais, tudo organizado em uma
             biblioteca online para você escolher, baixar e imprimir quando quiser.
           </p>
