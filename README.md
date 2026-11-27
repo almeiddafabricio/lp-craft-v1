@@ -24,6 +24,7 @@ npm run preview   # serve o /dist localmente para testar
 | `TERMS_URL`, `PRIVACY_URL` | links legais do rodapé |
 | `PRICES` | preços "de/por" dos planos e `ofertaPremium` (preço do pop-up de upsell). O % OFF é calculado sozinho |
 | `VTURB` | IDs do player da VSL (VTurb) no celular do Hero e capa mostrada enquanto ele carrega |
+| `VTURB_FEEDBACK` | IDs do vídeo de depoimento (VTurb), 1º item do carrossel de feedbacks |
 
 ### 2. Conteúdo: `src/data/`
 - `catalog.ts`: moldes do carrossel (nome + imagem) e quantidades por categoria da seção "Tudo organizado" (ajuste para os números reais)
