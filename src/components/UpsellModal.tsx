@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Check, Gift, X } from "lucide-react";
-import { CHECKOUT_BASICO, CHECKOUT_PREMIUM_OFERTA, PRICES } from "../config";
+import { CHECKOUT_BASICO_RECUSA, CHECKOUT_PREMIUM_OFERTA, PRICES } from "../config";
 import { BONUSES } from "../data/content";
 import { formatBRL } from "../lib/utils";
 import { CTAButton } from "./ui/CTAButton";
@@ -15,7 +15,7 @@ type Props = {
 /**
  * Upsell: aparece SÓ quando o cliente clica em "QUERO O BÁSICO".
  * - "QUERO A OFERTA"  -> checkout do Premium com preço especial (CHECKOUT_PREMIUM_OFERTA)
- * - "Não, obrigado"   -> segue para o checkout do Básico (CHECKOUT_BASICO)
+ * - "Não, obrigado"   -> segue para o checkout do Básico (CHECKOUT_BASICO_RECUSA)
  * Usa <dialog> nativo: foco preso no pop-up, Esc fecha, clique fora fecha.
  */
 export function UpsellModal({ open, onClose }: Props) {
@@ -112,7 +112,7 @@ export function UpsellModal({ open, onClose }: Props) {
 
           {/* Recusar: segue para o checkout do Básico */}
           <a
-            href={CHECKOUT_BASICO}
+            href={CHECKOUT_BASICO_RECUSA}
             rel="noopener"
             className="mt-1 inline-flex min-h-[44px] items-center justify-center text-sm font-semibold text-asphalt/70 underline decoration-dotted underline-offset-4 hover:text-asphalt"
           >

@@ -122,7 +122,7 @@ export function Pricing() {
             <FeatureList items={BASIC_FEATURES} />
 
             <div className="mt-6">
-              {/* Abre o upsell; quem recusar segue para CHECKOUT_BASICO (src/config.ts) */}
+              {/* Abre o upsell; quem recusar segue para CHECKOUT_BASICO_RECUSA (src/config.ts) */}
               <CTAButton
                 variant="outline"
                 href={CHECKOUT_BASICO}
