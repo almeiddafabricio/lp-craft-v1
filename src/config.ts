@@ -48,6 +48,16 @@ export const VTURB = {
   poster: "https://cdn.converteai.net/013cfdba-18ef-4f69-837c-ee091b5a6ffe/6b0919d5735c38b74fcb7629/poster.jpg",
 } as const;
 
+/** Vídeo de depoimento (VTurb, vertical 9:16): 1º item do carrossel de feedbacks.
+ *  Não começa sozinho; o player só é baixado quando o visitante chega perto da seção. */
+export const VTURB_FEEDBACK = {
+  playerId: "6b09ddb3fb864cac5936e4d9",
+  playerScript:
+    "https://scripts.converteai.net/013cfdba-18ef-4f69-837c-ee091b5a6ffe/players/6b09ddb3fb864cac5936e4d9/v4/player.js",
+  /** Capa do vídeo: aparece no card enquanto o player carrega */
+  poster: "https://cdn.converteai.net/013cfdba-18ef-4f69-837c-ee091b5a6ffe/6b09ddaa1758d717ce0cb674/poster.jpg",
+} as const;
+
 /** Preços (em reais). Usados nos cards de plano e no pop-up de upsell. */
 export const PRICES = {
   basico: { de: 47.9, por: 9.9 },

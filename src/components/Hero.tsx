@@ -1,40 +1,11 @@
-import { useEffect, useRef } from "react";
 import { VTURB } from "../config";
 import { CTAButton } from "./ui/CTAButton";
 import { HandArrow, Scribble, Tape } from "./ui/Decor";
 import { TrustCarousel } from "./ui/TrustCarousel";
-
-/* Elemento do player da VTurb. Vai como HTML "cru" (dangerouslySetInnerHTML) para o React
-   não mexer no que o player injeta dentro dele: sem isso, a hidratação poderia apagar o vídeo. */
-const VTURB_ELEMENT_HTML = `<vturb-smartplayer id="vid-${VTURB.playerId}" style="display:block;margin:0 auto;width:100%"></vturb-smartplayer>`;
+import { VturbPlayer } from "./ui/VturbPlayer";
 
 /** Mockup de celular em CSS com a VSL (VTurb) dentro: a tela tem 9:16, igual ao vídeo */
 function PhoneMockup() {
-  const slotRef = useRef<HTMLDivElement>(null);
-
-  // A miniatura que o player injeta vem sem "alt" (falha de acessibilidade/SEO no Lighthouse):
-  // marcamos as imagens do player como decorativas; o nome do vídeo fica no aria-label do bloco.
-  useEffect(() => {
-    const slot = slotRef.current;
-    if (!slot) return;
-    const fixAlt = () => slot.querySelectorAll("img:not([alt])").forEach((img) => img.setAttribute("alt", ""));
-    fixAlt();
-    const observer = new MutationObserver(fixAlt);
-    observer.observe(slot, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, []);
-
-  // No build, o index.html já carrega o player logo depois do HTML pré-renderizado.
-  // Este efeito só age no modo dev (página montada pelo React, sem HTML pronto).
-  useEffect(() => {
-    if (document.querySelector("script[data-vturb-player]")) return;
-    const s = document.createElement("script");
-    s.src = VTURB.playerScript;
-    s.async = true;
-    s.setAttribute("data-vturb-player", "");
-    document.head.appendChild(s);
-  }, []);
-
   return (
     <div className="relative mx-auto w-fit">
       <div className="phone">
@@ -43,12 +14,12 @@ function PhoneMockup() {
         {/* câmera na borda de cima (fora da tela, para não cobrir o vídeo) */}
         <span className="phone-camera" aria-hidden="true" />
         <div className="phone-screen" style={{ backgroundImage: `url(${VTURB.poster})` }}>
-          <div
-            ref={slotRef}
+          {/* No build, o index.html já carrega este player logo depois do HTML pré-renderizado */}
+          <VturbPlayer
+            playerId={VTURB.playerId}
+            playerScript={VTURB.playerScript}
+            label="Vídeo de apresentação dos moldes de carros 3D"
             className="vsl-slot"
-            role="group"
-            aria-label="Vídeo de apresentação dos moldes de carros 3D"
-            dangerouslySetInnerHTML={{ __html: VTURB_ELEMENT_HTML }}
           />
         </div>
       </div>
